@@ -21,8 +21,8 @@ public class TodoService implements TodoRepository {
 
 
     @Override
-    public List<Todo> findAll() {
-        return this.todoRepository.findAll();
+    public List<Todo> findAll(int page, String name, String priority, String done) {
+        return this.todoRepository.findAll(page, name, priority, done);
     }
 
     @Override
@@ -32,7 +32,8 @@ public class TodoService implements TodoRepository {
 
     @Override
     public Todo save(Todo todo) {
-        return this.todoRepository.save(todo);
+        Todo todoToSave = new Todo(todo.getText(), todo.getDueDate(), todo.getPriority());
+        return this.todoRepository.save(todoToSave);
     }
 
     @Override
@@ -41,7 +42,12 @@ public class TodoService implements TodoRepository {
     }
 
     @Override
-    public Todo update(Todo todo) {
-        return this.todoRepository.update(todo);
+    public Optional<Todo> update(UUID id, Todo todo) {
+        return this.todoRepository.update(id, todo);
+    }
+
+    @Override
+    public Optional<Todo> markTodo(UUID id, boolean done) {
+        return this.todoRepository.markTodo(id, done);
     }
 }
