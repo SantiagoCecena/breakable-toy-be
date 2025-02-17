@@ -10,12 +10,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/todos")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost:8080"})
 public class TodoController {
 
     @Autowired
@@ -76,6 +77,13 @@ public class TodoController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable UUID id) {
         todoService.deleteById(id);
+    }
+
+    // Get average time
+    @GetMapping("/averages")
+    public ResponseEntity<Map<String, Double>> getAverages() {
+        Map<String, Double> averages = todoService.getAllAverages();
+        return ResponseEntity.ok(averages);
     }
 
 }
