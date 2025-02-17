@@ -24,10 +24,15 @@ public class TodoRepositoryImpl implements TodoRepository {
         todos.add(new Todo("Buy groceries", null, Priority.HIGH));
         todos.add(new Todo("Comprar jabon", null, Priority.MEDIUM));
         todos.add(new Todo("Buy groceries", null, Priority.HIGH));
+        todos.add(new Todo("Build next breakable toy", LocalDateTime.of(2025, Month.FEBRUARY, 22, 0, 0), Priority.MEDIUM));
         todos.add(new Todo("Build next breakable toy", LocalDateTime.of(2025, Month.MARCH, 10, 0, 0), Priority.MEDIUM));
         todos.add(new Todo("Build next breakable toy", LocalDateTime.of(2025, Month.MARCH, 10, 0, 0), Priority.MEDIUM));
         todos.add(new Todo("Build next breakable toy", LocalDateTime.of(2025, Month.MARCH, 10, 0, 0), Priority.MEDIUM));
-        todos.add(new Todo("Build next breakable toy", LocalDateTime.of(2025, Month.MARCH, 10, 0, 0), Priority.MEDIUM));
+    }
+
+    @Override
+    public List<Todo> findAll() {
+        return this.todos;
     }
 
     @Override
@@ -85,6 +90,11 @@ public class TodoRepositoryImpl implements TodoRepository {
         }
         Todo todo = todoToDone.get();
         todo.setDone(done);
+        if (done) {
+            todo.setDoneDate(LocalDateTime.now());
+        } else {
+            todo.setDoneDate(null);
+        }
         return Optional.of(todo);
     }
 }
