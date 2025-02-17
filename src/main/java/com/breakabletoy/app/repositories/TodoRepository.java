@@ -9,6 +9,8 @@ import java.util.UUID;
 
 public interface TodoRepository {
 
+    List<Todo> findAll();
+
     // Get all todos
     List<Todo> findAll(int page, String name, String priority, String done);
 
