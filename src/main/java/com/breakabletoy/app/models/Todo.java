@@ -1,19 +1,27 @@
 package com.breakabletoy.app.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class Todo {
     private final UUID id;
+    @NotNull
+    @NotBlank
+    @Size(min = 3, max = 255)
     private String text;
     private LocalDateTime dueDate;
     private boolean done;
     private LocalDateTime doneDate;
-    private String priority;
+    @NotNull
+    private Priority priority;
     private final LocalDateTime createdAt;
 
 
-    public Todo(String text, LocalDateTime dueDate, String priority) {
+    public Todo(String text, LocalDateTime dueDate, Priority priority) {
         this.id = UUID.randomUUID();
         this.text = text;
         this.dueDate = dueDate;
@@ -59,11 +67,11 @@ public class Todo {
         this.doneDate = doneDate;
     }
 
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 

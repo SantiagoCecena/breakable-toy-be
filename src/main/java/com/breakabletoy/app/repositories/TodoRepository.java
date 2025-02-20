@@ -1,7 +1,6 @@
 package com.breakabletoy.app.repositories;
 
 import com.breakabletoy.app.models.Todo;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
@@ -10,8 +9,10 @@ import java.util.UUID;
 
 public interface TodoRepository {
 
-    // Get all todos
     List<Todo> findAll();
+
+    // Get all todos
+    List<Todo> findAll(int page, String name, String priority, String done);
 
     // Get a todo by id
     Optional<Todo> findById(UUID id);
@@ -23,5 +24,13 @@ public interface TodoRepository {
     void deleteById(UUID id);
 
     // Update a todo
-    Todo update(Todo todo);
+    Optional<Todo> update(UUID id, Todo todo);
+
+    // Mark todo as done or undone
+    Optional<Todo> markTodo(UUID id, boolean done);
+
+    // Mark todo as done
+    //    Optional<Todo> markAsDone(UUID id);
+    // Mark todo as undone
+    //    Optional<Todo> markAsUndone(UUID id);
 }
